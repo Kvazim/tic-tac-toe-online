@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { SYMBOL_O, SYMBOL_X } from './constants';
+import { useState } from "react";
+import { SYMBOL_O, SYMBOL_X } from "./constants";
 
 const computeWinner = (cells) => {
   const lines = [
@@ -19,11 +19,20 @@ const computeWinner = (cells) => {
       return [a, b, c];
     }
   }
-}
-
+};
 
 export function useGameState() {
-  const [cells, setCells] = useState([null, null, null, null, null, null, null, null, null]);
+  const [cells, setCells] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
   const [currentStep, setCurrentStep] = useState(SYMBOL_O);
   const [winnerSequence, setWinnerSequence] = useState();
 
@@ -39,18 +48,16 @@ export function useGameState() {
     cellsCopy[index] = currentStep;
     const winner = computeWinner(cellsCopy);
 
-
     setCells(cellsCopy);
     setCurrentStep(currentStep === SYMBOL_O ? SYMBOL_X : SYMBOL_O);
     setWinnerSequence(winner);
-  }
+  };
 
   const resetGame = () => {
     setCells(Array.from({ length: 9 }, () => null));
     setCurrentStep(SYMBOL_X);
     setWinnerSequence(undefined);
   };
-
 
   return {
     cells,
