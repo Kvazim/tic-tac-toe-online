@@ -11,7 +11,7 @@ export function Header() {
       <div className="w-px h-8 bg-slate-200 mx-6" />
       <UiButton className="w-44" variant="primary" size="lg">Играть</UiButton>
       <button className="ml-auto flex items-center gap-2 text-teal-600 hover:text-teal-500 transition-colors">
-        <Profile />
+        <Profile name="Paromovevg" rating="1230" />
         <ArowIconDown />
       </button>
     </header>
