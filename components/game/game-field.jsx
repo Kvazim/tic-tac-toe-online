@@ -3,7 +3,14 @@ import { UiButton } from "../uikit/ui-button";
 import { GameSymbol } from "./game-symbol";
 
 
-export function GameField({ className, cells, currentMove,nextMove, handleCellClick }) {
+export function GameField({
+  className,
+  cells,
+  currentMove,
+  nextMove,
+  handleCellClick,
+  winnerSequence
+}) {
 
   const actions = <>
     <UiButton size="md" variant="primary">Ничья</UiButton>
@@ -18,6 +25,7 @@ export function GameField({ className, cells, currentMove,nextMove, handleCellCl
           cells.map((cell, i) => (
             <GameCell
               key={i}
+              isWinner={winnerSequence?.includes(i)}
               onClick={() => handleCellClick(i)}
             >
               {cell && <GameSymbol symbol={cell} className="w-5 h-5" />}
@@ -68,10 +76,10 @@ function GameGrid({children}) {
   );
 }
 
-function GameCell({children, onClick}) {
+function GameCell({children, onClick, isWinner}) {
   return (
     <button
-     className="flex items-center justify-center border border-slate-200 -ml-px -mt-px"
+     className={clsx("flex items-center justify-center border border-slate-200 -ml-px -mt-px", isWinner && "bg-orange-600/10")}
      onClick={onClick}
     >
       {children}
