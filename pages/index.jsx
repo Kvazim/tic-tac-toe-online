@@ -9,8 +9,8 @@ import { Header } from '../components/header';
 
 
 export default function HomePage() {
-  const [playersCount] = useState(2);
-  const {cells, currentMove, nextMove, winnerSequence, handleCellClick} = useGameState(playersCount);
+  const [playersCount] = useState(4);
+  const {cells, currentMove, nextMove, winnerSequence, handleCellClick, handlePlayerTimeOver, winnerSymbol} = useGameState(playersCount);
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -19,7 +19,9 @@ export default function HomePage() {
         <GameTitle playersCount={playersCount} />
         <GameInfo
           playersCount={playersCount}
+          isWinner={!!winnerSymbol}
           currentMove={currentMove}
+          onPlayerTimeOver={handlePlayerTimeOver}
           className="mt-4"
         />
         <GameField
@@ -27,6 +29,7 @@ export default function HomePage() {
           currentMove={currentMove}
           nextMove={nextMove}
           winnerSequence={winnerSequence}
+          winnerSymbol={winnerSymbol}
           handleCellClick={handleCellClick}
           className="mt-6"
         />

@@ -2,13 +2,12 @@ import clsx from "clsx";
 import { Profile } from "../profile";
 import { GameSymbol } from "./game-symbol";
 import { GAME_SYMBOLS } from "./constants";
+import { useEffect, useState } from "react";
 
 import avatarSrc1 from "./images/avatar-1.png"
 import avatarSrc2 from "./images/avatar-2.png"
 import avatarSrc3 from "./images/avatar-3.png"
 import avatarSrc4 from "./images/avatar-4.png"
-import { useEffect, useState } from "react";
-import internal from "stream";
 
 const players = [
   {
@@ -23,25 +22,25 @@ const players = [
     name: "Paromovevg",
     rating: "1230",
     avatar: avatarSrc2,
-    symbol: GAME_SYMBOLS.SQUARE,
+    symbol: GAME_SYMBOLS.ZERO,
   },
   {
     id: 3,
     name: "KJlfskfdhlksdhfsdlfkhdshldfsdkdjfklsd",
     rating: "1230",
     avatar: avatarSrc3,
-    symbol: GAME_SYMBOLS.TRIANGLE,
+    symbol: GAME_SYMBOLS.SQUARE,
   },
   {
     id: 4,
     name: "Paromovevg",
     rating: "1230",
     avatar: avatarSrc4,
-    symbol: GAME_SYMBOLS.ZERO,
+    symbol: GAME_SYMBOLS.TRIANGLE,
   },
 ];
 
-export function GameInfo({ className, playersCount, currentMove }) {
+export function GameInfo({ className, playersCount, currentMove, isWinner, onPlayerTimeOver }) {
 
   return (
     <div className={clsx("grid grid-cols-2 gap-3 justify-between bg-white rounded-2xl shadow-md px-8 py-4", className)}>
@@ -51,7 +50,8 @@ export function GameInfo({ className, playersCount, currentMove }) {
             playerInfo={player}
             key={player.id}
             isRight={index % 2 === 1}
-            isTimerRunning={currentMove === player.symbol}
+            onTimeOver={() => onPlayerTimeOver(player.symbol)}
+            isTimerRunning={currentMove === player.symbol && !isWinner}
           />
         ))
       }
@@ -59,7 +59,7 @@ export function GameInfo({ className, playersCount, currentMove }) {
   );
 }
 
-function PlayerInfo({playerInfo, isRight, isTimerRunning}) {
+function PlayerInfo({playerInfo, isRight, isTimerRunning, onTimeOver}) {
   const [seconds, setSeconds] = useState(60);
   const minutesString = String(Math.floor(seconds / 60)).padStart(2, "0");
   const secondString = String(seconds % 60).padStart(2, "0");
@@ -84,6 +84,13 @@ function PlayerInfo({playerInfo, isRight, isTimerRunning}) {
       }
     }
   }, [isTimerRunning]);
+
+  useEffect(() => {
+    if (seconds === 0) {
+      onTimeOver();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[seconds]);
 
   return (
     <div className="flex gap-3 items-center">
