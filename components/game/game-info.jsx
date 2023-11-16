@@ -16,23 +16,44 @@ const players = [
     rating: "1230",
     avatar: avatarSrc1,
     symbol: GAME_SYMBOLS.CROSS,
-  }
+  },
+  {
+    id: 2,
+    name: "Paromovevg",
+    rating: "1230",
+    avatar: avatarSrc2,
+    symbol: GAME_SYMBOLS.CROSS,
+  },
+  {
+    id: 3,
+    name: "KJlfskfdhlksdhfsdlfkhdshldfsdkdjfklsd",
+    rating: "1230",
+    avatar: avatarSrc3,
+    symbol: GAME_SYMBOLS.CROSS,
+  },
+  {
+    id: 4,
+    name: "Paromovevg",
+    rating: "1230",
+    avatar: avatarSrc4,
+    symbol: GAME_SYMBOLS.CROSS,
+  },
 ];
 
-export function GameInfo({className}) {
+export function GameInfo({ className, playersCount }) {
   return (
-    <div className={clsx("flex gap-3 justify-between bg-white rounded-2xl shadow-md px-8 py-4", className)}>
+    <div className={clsx("grid grid-cols-2 gap-3 justify-between bg-white rounded-2xl shadow-md px-8 py-4", className)}>
       {
-        players.map((player) => <PlayerInfo playerInfo={player} key={player.id}/>)
+        players.slice(0, playersCount).map((player, index) => <PlayerInfo playerInfo={player} key={player.id} isRight={index % 2 === 1} />)
       }
     </div>
   );
 }
 
-function PlayerInfo({playerInfo}) {
+function PlayerInfo({playerInfo, isRight}) {
   return (
     <div className="flex gap-3 items-center">
-      <div className="relative">
+      <div className={clsx("relative", isRight && "order-3")}>
         <Profile
           className="w-44"
           name={playerInfo.name}
@@ -43,8 +64,8 @@ function PlayerInfo({playerInfo}) {
           <GameSymbol symbol={playerInfo.symbol} />
         </div>
       </div>
-      <div className="h-6 w-px bg-slate-200"></div>
-      <div className="text-slate-900 text-lg font-semibold">01:08</div>
+      <div className={clsx("h-6 w-px bg-slate-200", isRight && "order-2")}></div>
+      <div className={clsx("text-slate-900 text-lg font-semibold", isRight && "order-1")}>01:08</div>
     </div>
   );
 }
