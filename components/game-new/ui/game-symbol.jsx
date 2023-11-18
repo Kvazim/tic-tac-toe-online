@@ -2,7 +2,7 @@ import { CrossIcon } from "./icons/cross-icon";
 import { ZeroIcon } from "./icons/zero-icon";
 import { SquareIcon } from "./icons/square-icon";
 import { TriangleIcon } from "./icons/triangle-icon";
-import { GAME_SYMBOLS } from "./constants";
+import { GAME_SYMBOLS } from "../constants";
 
 
 export function GameSymbol({ symbol, className }) {
