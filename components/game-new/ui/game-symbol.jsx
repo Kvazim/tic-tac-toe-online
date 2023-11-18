@@ -1,7 +1,7 @@
-import { CrossIcon } from "./icons/cross-icon";
-import { ZeroIcon } from "./icons/zero-icon";
-import { SquareIcon } from "./icons/square-icon";
-import { TriangleIcon } from "./icons/triangle-icon";
+import { CrossIcon } from "../ui/icons/cross-icon";
+import { ZeroIcon } from "../ui/icons/zero-icon";
+import { SquareIcon } from "../ui/icons/square-icon";
+import { TriangleIcon } from "../ui/icons/triangle-icon";
 import { GAME_SYMBOLS } from "../constants";
 
 
