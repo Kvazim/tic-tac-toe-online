@@ -44,4 +44,4 @@ export function PlayerInfo({
       <div className={clsx("text-lg font-semibold w-[60px]", isRight && "order-1", getTimerRunning())}>{minutesString}:{secondString}</div>
     </div>
   );
-}
+};

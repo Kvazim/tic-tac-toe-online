@@ -15,10 +15,10 @@ export function computeWinner(gameState, sequenceSize = 5, fieldSize = 19) {
 
     function getSequenceIndexses(i) {
         const res = [
-            [],
-            [],
-            [],
-            [],
+            [],  // горизонталь -
+            [],  // вертикаль \
+            [],  // вертикаль /
+            [],  // вертикаль |
         ];
 
         for (let j = 0; j < sequenceSize; j++) {
